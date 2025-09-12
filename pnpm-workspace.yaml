@@ -1,0 +1,5 @@
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - unrs-resolver
+  - vue-demi
+  - workerd
