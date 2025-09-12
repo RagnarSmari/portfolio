@@ -10,12 +10,10 @@ onMounted(() => {
   const ctx = canvas.getContext('2d')
   if (!ctx) return
 
-  // Mouse tracking
-  const mouse = {
-    x: 0,
-    y: 0,
-    moved: false
-  }
+  // Automatic movement
+  let time = 0
+  const autoMovementSpeed = 0.1
+  const autoMovementRadius = 10000
 
   // Set canvas size
   const resizeCanvas = () => {
@@ -27,19 +25,8 @@ onMounted(() => {
 
   // Event listeners
   const handleResize = () => resizeCanvas()
-  const handleMouseMove = (e: MouseEvent) => {
-    mouse.x = e.clientX
-    mouse.y = e.clientY
-    mouse.moved = true
-  }
-
-  const handleClick = (e: MouseEvent) => {
-    createShootingStar(e.clientX, e.clientY)
-  }
 
   window.addEventListener('resize', handleResize)
-  window.addEventListener('mousemove', handleMouseMove)
-  window.addEventListener('click', handleClick)
 
   // Star configuration
   const stars: Array<{
@@ -76,17 +63,17 @@ onMounted(() => {
         y,
         baseX: x,
         baseY: y,
-        size: Math.random() * 2.5 + 0.5,
-        opacity: Math.random() * 0.8 + 0.2,
+        size: Math.random() * 1.2 + 0.2, // Smaller stars (was 2.5 + 0.5)
+        opacity: Math.random() * 0.6 + 0.1, // Slightly dimmer (was 0.8 + 0.2)
         speed: Math.random() * 0.02 + 0.01,
-        parallaxFactor: Math.random() * 0.03 + 0.01
+        parallaxFactor: Math.random() * 0.02 + 0.005 // Reduced parallax
       })
     }
   }
 
   const createShootingStar = (startX: number, startY: number) => {
     const angle = Math.random() * Math.PI * 2
-    const speed = Math.random() * 8 + 4
+    const speed = Math.random() * 6 + 2 // Slightly slower
 
     shootingStars.push({
       x: startX,
@@ -95,24 +82,17 @@ onMounted(() => {
       vy: Math.sin(angle) * speed,
       life: 0,
       maxLife: 60 + Math.random() * 40,
-      size: Math.random() * 3 + 2
+      size: Math.random() * 2 + 1 // Smaller shooting stars
     })
   }
 
   const drawStar = (star: typeof stars[0]) => {
-    // Calculate parallax offset based on mouse position
-    let offsetX = 0
-    let offsetY = 0
+    // Calculate automatic movement offset
+    const autoOffsetX = Math.cos(time * autoMovementSpeed) * autoMovementRadius
+    const autoOffsetY = Math.sin(time * autoMovementSpeed * 0.7) * autoMovementRadius * 0.5
 
-    if (mouse.moved) {
-      const centerX = canvas.width / 2
-      const centerY = canvas.height / 2
-      offsetX = (mouse.x - centerX) * star.parallaxFactor
-      offsetY = (mouse.y - centerY) * star.parallaxFactor
-    }
-
-    const x = star.baseX + offsetX
-    const y = star.baseY + offsetY
+    const x = star.baseX + autoOffsetX * star.parallaxFactor 
+    const y = star.baseY + autoOffsetY * star.parallaxFactor + mouseOffsetY
 
     // Draw main star
     ctx.beginPath()
@@ -120,11 +100,11 @@ onMounted(() => {
     ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`
     ctx.fill()
 
-    // Add glow effect for larger stars
-    if (star.size > 1.5) {
+    // Add glow effect for larger stars (reduced threshold)
+    if (star.size > 0.8) {
       ctx.beginPath()
-      ctx.arc(x, y, star.size * 2, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * 0.1})`
+      ctx.arc(x, y, star.size * 1.5, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * 0.05})` // Reduced glow
       ctx.fill()
     }
 
@@ -137,9 +117,9 @@ onMounted(() => {
     const alpha = 1 - (shootingStar.life / shootingStars.maxLife)
 
     // Draw trail
-    const trailLength = 20
+    const trailLength = 15 // Shorter trail
     for (let i = 0; i < trailLength; i++) {
-      const trailAlpha = alpha * (1 - i / trailLength) * 0.8
+      const trailAlpha = alpha * (1 - i / trailLength) * 0.6 // Dimmer trail
       if (trailAlpha <= 0) continue
 
       const trailX = shootingStar.x - shootingStar.vx * i * 0.5
@@ -158,10 +138,10 @@ onMounted(() => {
     ctx.fillStyle = `rgba(255, 255, 200, ${alpha})`
     ctx.fill()
 
-    // Add bright glow
+    // Add bright glow (reduced)
     ctx.beginPath()
-    ctx.arc(shootingStar.x, shootingStar.y, shootingStar.size * 3, 0, Math.PI * 2)
-    ctx.fillStyle = `rgba(255, 255, 150, ${alpha * 0.3})`
+    ctx.arc(shootingStar.x, shootingStar.y, shootingStar.size * 2, 0, Math.PI * 2)
+    ctx.fillStyle = `rgba(255, 255, 150, ${alpha * 0.2})`
     ctx.fill()
   }
 
@@ -169,7 +149,7 @@ onMounted(() => {
     stars.forEach(star => {
       // Twinkling effect
       star.opacity += (Math.random() - 0.5) * star.speed
-      star.opacity = Math.max(0.1, Math.min(0.9, star.opacity))
+      star.opacity = Math.max(0.05, Math.min(0.7, star.opacity)) // Dimmer range
     })
   }
 
@@ -183,7 +163,7 @@ onMounted(() => {
       shootingStar.life++
 
       // Apply gravity
-      shootingStar.vy += 0.1
+      shootingStar.vy += 0.08
 
       // Remove if out of bounds or life expired
       if (shootingStar.life > shootingStar.maxLife ||
@@ -194,9 +174,9 @@ onMounted(() => {
     }
   }
 
-  // Add some random shooting stars
+  // Add some random shooting stars (less frequent)
   const addRandomShootingStar = () => {
-    if (Math.random() < 0.003) { // 0.3% chance per frame
+    if (Math.random() < 0.001) { // 0.1% chance per frame (was 0.3%)
       const side = Math.floor(Math.random() * 4)
       let startX, startY
 
@@ -223,11 +203,13 @@ onMounted(() => {
   }
 
   const animate = () => {
-    // Clear canvas with dark background
+    time++
+
+    // Clear canvas with darker background
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
-    gradient.addColorStop(0, '#0f172a')
-    gradient.addColorStop(0.5, '#1e293b')
-    gradient.addColorStop(1, '#334155')
+    gradient.addColorStop(0, '#020617') // Much darker (was #0f172a)
+    gradient.addColorStop(0.5, '#0f172a') // Darker (was #1e293b)
+    gradient.addColorStop(1, '#1e293b') // Darker (was #334155)
 
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -250,8 +232,6 @@ onMounted(() => {
   // Cleanup function
   const cleanup = () => {
     window.removeEventListener('resize', handleResize)
-    window.removeEventListener('mousemove', handleMouseMove)
-    window.removeEventListener('click', handleClick)
   }
 
   onUnmounted(cleanup)
@@ -262,7 +242,7 @@ onMounted(() => {
   <canvas
       ref="starfieldRef"
       class="fixed inset-0 z-0 cursor-crosshair"
-      style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)"
+      style="background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%)"
   />
 </template>
 
