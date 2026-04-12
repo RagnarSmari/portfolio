@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  compatibilityDate: '2026-04-12',
   devtools: { enabled: true },
 
   modules: [
@@ -12,5 +12,13 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxthub/core'
   ],
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+  nitro: {
+    preset: 'cloudflare_module',
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true
+    }
+
+  }
 })
