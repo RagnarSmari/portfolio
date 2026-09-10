@@ -48,13 +48,7 @@ const skills = [
     <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12 md:mb-16">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Technical Skills</h2>
-        <p class="text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto px-4">
-          A comprehensive overview of my technical expertise and proficiency levels
-        </p>
-        <p class="text-sm text-neutral-400 max-w-2xl mx-auto px-4">
-          This is an endless list but there is the overall 
-        </p>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Technical Skills</h2>
       </div>
 
       <!-- Skills Grid -->

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import AboutSection from "~/components/aboutSection.vue";
-import SkillsSection from "~/components/skillsSection.vue";
-import ExperienceSection from "~/components/experienceSection.vue";
-import ProjectsSection from "~/components/projectsSection.vue";
+import AboutSection from '~/components/old/aboutSection.vue';
+import ExperienceSection from '~/components/old/experienceSection.vue';
+import ProjectsSection from '~/components/old/projectsSection.vue';
+import SkillsSection from '~/components/old/skillsSection.vue';
+
 </script>
 
 <template>
   <div class="w-full">
-    <div class="border-x border-dashed min-h-screen">
-
+    <div class="min-h-screen">
       <section id="about" class="min-h-screen">
         <AboutSection />
       </section>

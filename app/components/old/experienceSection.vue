@@ -3,13 +3,13 @@ const experiences = [
   {
     id: 1,
     company: "Akureyri University",
-    position: "Teacher",
+    position: "TA",
     period: "2024 - 2024",
     location: "On-site",
     type: "Part-time",
-    description: "Assistant teacher for Programming languages and Advanced game design courses.",
+    description: "Assistant teacher for Programming languages and also Advanced game design courses.",
     achievements: [
-      "Helping students with their assignments and projects"
+      "Helping students reach better understanding of programming"
     ],
     technologies: ["F#", "Unity"],
   },
@@ -31,7 +31,20 @@ const experiences = [
       "Communicated with clients and stakeholders to ensure project success",
     ],
     technologies: ["C#", ".NET", "Blazor", "SignalR", "PostgreSQL", "Docker","SQL Server", "Eclipse Mosquitto", "Git", "Azure"]
-  }
+  },
+  {
+    id: 3,
+    company: "Akureyri University",
+    position: "Teacher",
+    period: "2026 - 2026",
+    location: "On-site",
+    type: "Part-time",
+    description: "Teacher for Web development 2 course",
+    achievements: [
+      "Creating projects for students, grading it accordingly "
+    ],
+    technologies: ["F#", "Unity"],
+  },
 ]
 </script>
 
