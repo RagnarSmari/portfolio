@@ -1,29 +1,25 @@
 <script setup lang="ts">
-import AboutSection from '~/components/old/aboutSection.vue';
-import ExperienceSection from '~/components/old/experienceSection.vue';
-import ProjectsSection from '~/components/old/projectsSection.vue';
-import SkillsSection from '~/components/old/skillsSection.vue';
-
 </script>
 
 <template>
-  <div class="w-full">
-    <div class="min-h-screen">
-      <section id="about" class="min-h-screen">
-        <AboutSection />
-      </section>
+  <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex items-center justify-center px-4 pb-[12vh]">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Name -->
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-light mb-4 font-mono">
+          Hello, I'm <span class="font-semibold text-primary-500">Ragnar</span>
+        </h1>
 
-      <section id="skills" class="min-h-screen">
-        <SkillsSection />
-      </section>
-
-      <section id="experience" class="min-h-screen">
-        <ExperienceSection />
-      </section>
-
-      <section id="projects" class="min-h-screen">
-        <ProjectsSection />
-      </section>
+        <!-- Title -->
+        <h2 class="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold  leading-tight font-mono">
+          Software Developer
+        </h2>
+        <div class="max-w-3xl mx-auto mb-4 md:mb-12">
+          <p class="text-lg sm:text-xl leading-relaxed font-light font-mono">
+            based in Akureyri, Iceland.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>

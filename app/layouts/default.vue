@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from "~/components/layout/navbar.vue";
-import Starbackground from "~/components/starbackground.vue";
+import Starbackground from "~/components/star-background.vue";
 </script>
 
 <template>
@@ -9,9 +9,9 @@ import Starbackground from "~/components/starbackground.vue";
       <Starbackground />
     </div>
     <div class="relative z-10 flex justify-center">
-      <div class="container">
-        <!-- <Navbar /> -->
-        <div class="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-60">
+      <div class="container min-h-dvh flex flex-col">
+        <Navbar />
+        <div class="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-60 flex-1 flex flex-col">
           <slot/>
         </div>
       </div>
