@@ -7,8 +7,8 @@ let cleanup = () => {};
 const config = {
   count: 1000,
   speed: 0.0008,
-  steering: 1.6,
-  opacity: 0.3,
+  steering: 0,
+  opacity: 0.4,
   bgColor: "#000000",
   starColor: "rgba(210,225,255,<alpha>)"
 };

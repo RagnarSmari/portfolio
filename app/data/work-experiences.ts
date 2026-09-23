@@ -3,34 +3,34 @@ import type { WorkExperience } from '~/types/work-exp'
 export const Experiences: WorkExperience[] = [
   {
     id: 1,
-    company: 'Akureyri University',
-    position: 'TA',
-    period: '2024 - 2024',
+    company: 'University of Akureyri',
+    position: 'Teaching Assistant',
+    period: '2024',
     location: 'On-site',
     type: 'Part-time',
-    description: 'Assistant teacher for Programming languages and also Advanced game design courses.',
+    description: 'Teaching assistant for Programming Languages (functional programming in F#) and Advanced Game Design (Unity).',
     achievements: [
-      'Helping students reach better understanding of programming'
+      'Supported students in understanding assignments and concepts taught during lectures'
     ],
-    technologies: ['F#', 'Unity']
+    technologies: ['F#', 'Unity', 'C#']
   },
   {
     id: 2,
     company: 'Slippurinn DNG',
-    position: 'Software developer',
+    position: 'Software Developer',
     period: '2023 - present',
     location: 'On-site',
     type: 'Full-time',
-    description: 'Developing and maintaing Promas, a production management software for fish processing equipment.',
+    description:
+      'Developing Promas, a production management system for fish processing used on vessels and in on-shore plants.',
     achievements: [
-      'Implemented realtime dashboards with SignalR and Blazor',
-      'Integrated docker and refined deployment strategies for improved reliability',
-      'Implemented automated testing strategies improving code coverage',
-      'Participated in agile development processes and sprint planning',
-      'Integrated PostgreSQL database and switched hosting provider from Windows to Linux',
-      'Communicated with clients and stakeholders to ensure project success'
+      'Rebuilt Promas into a modular, equipment-agnostic platform supporting graders, filleting lines palletizing and more',
+      'Built real-time dashboards with SignalR and Blazor, streaming live data from grading equipment over MQTT',
+      'Developed a traceability and labelling system with GS1 barcodes and multi-language labels for export markets',
+      'Standardised deployments on Docker across vessels and on-shore sites, with secure remote access for maintenance and updates',
+      'Delivered an in-house inventory system (.NET + Nuxt) integrated with the company\'s dkPlus ERP'
     ],
-    technologies: ['C#', '.NET', 'Blazor', 'SignalR', 'PostgreSQL', 'Docker', 'SQL Server', 'Eclipse Mosquitto', 'Azure', 'Vue.js', 'NuxtJs']
+    technologies: ['C#', '.NET', 'Blazor', 'SignalR', 'PostgreSQL', 'MQTT', 'Docker', 'Azure', 'Nuxt']
   },
   {
     id: 3,
@@ -47,5 +47,18 @@ export const Experiences: WorkExperience[] = [
       'Graded all submissions and conducted oral exams'
     ],
     technologies: ['JavaScript', 'TypeScript', 'React', 'NextJs']
-  }
+  },
+  {
+    id: 4,
+    company: 'University of Akureyri',
+    position: 'Teaching Assistant',
+    period: '2026',
+    location: 'On-site',
+    type: 'Part-time',
+    description: 'Teaching assistant for Web Services, covering HTTP, RESTful and RPC services, .NET Web API, authentication, authorization and DevOps.',
+    achievements: [
+      'Supported students in understanding assignments and concepts taught during lectures'
+    ],
+    technologies: ['C#', '.NET', 'ASP.NET Core', 'REST', 'HTTP']
+  },
 ]
